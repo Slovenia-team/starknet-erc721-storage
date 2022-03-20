@@ -33,6 +33,11 @@ Pull the OpenZeppelin submodule:
 git submodule update --init --recursive
 ```
 
+Rename ERC721 storage submodule to allow imports.
+```
+git mv starknet-erc721-storage starknet_erc721_storage
+```
+
 ## Write properties
 
 ### `setPropertyFelt`
