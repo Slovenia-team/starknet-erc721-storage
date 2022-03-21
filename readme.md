@@ -1,4 +1,5 @@
 # Starknet ERC721 metadata storage
+[![Tests and linter](https://github.com/Slovenia-team/starknet-erc721-storage/actions/workflows/python-app.yml/badge.svg)](https://github.com/Slovenia-team/starknet-erc721-storage/actions/workflows/python-app.yml)
 
 The purpuse of this library is to unify/simplify the storage of the metadata for ERC721 tokens. It is ready to be used as is, by simply importing the `Storage.cairo` file to your ERC721 token and implementing the view/external caller methods. An example is given in `test\ERC721.cairo`.
 
