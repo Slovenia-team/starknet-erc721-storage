@@ -15,7 +15,7 @@ It follows the OpenZeppelin ERC721 token standard for StarkNet [non-fungible tok
   *  [getPropertyFelt](#getpropertyfelt)
   *  [getPropertyArray](#getpropertyarray)
   *  [getProperties](#getproperties)
-- [Usage](#usage)
+- [Example Usage](#example-usage)
 
 ## Prerequisites
 
@@ -40,6 +40,11 @@ git mv starknet-erc721-storage starknet_erc721_storage
 
 ## Write properties
 
+---
+**NOTES**
+1. *Property names can not exceed 31 chars.*
+2. *A non-ascii character accounts for 2 characters (for example: á, é, í, ó, ú).*
+---
 ### `setPropertyFelt`
 
 Sets a named property of type `felt` for token.
@@ -145,4 +150,44 @@ properties_len: felt
 properties: felt*
 ```
 
-## Usage
+## Example Usage
+Let see the use of **Storage** on a practical example. Suppose we would like to store a student with parameters:
+```java
+name: 'John'
+surname: 'Doe'
+identification: 99999999
+Address: 'Apartment 1c 213 Derrick Street Boston, MA 02130 USA'
+```
+> *(Note) Let's ignore the sql noramlization rules of address for the sake of simplicity.*
+
+We can insert all 4 parameters with one request using the `setProperties` function. In order to achive this we first need to map `strings` to `felt` since cairo only supports `felt` type.
+
+---
+**NOTES**
+- Example python helper methods for string->felt (and vice versa) are accessible in `test\utils.py`. For our example we would use `str_to_felt()` for *name* and *surname* (since they can be stored as short string) and `str_to_felt_array()` for address.
+---
+
+The request looks like:
+```
+name -> calculate felt
+surname -> calculate felt
+address -> calculate felts
+```
+```
+setProperties(4, (TODO calculate felts), tokenId, 4, (TODO calculate felts), TODO, (TODO calculate felts))
+```
+
+Voila! All 4 properties are inserted. 
+
+Now you can retrive them as:
+```
+getProperties(4, (TODO calculate felts), tokenId)
+```
+
+Now let's say a student gets a new grade. We can add simply by using the `setPropertyFelt` method.
+```
+chemistry -> calculate felt
+```
+```
+setPropertyFelt(TODO, tokenId, 10)
+```
