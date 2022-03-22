@@ -157,7 +157,7 @@ Let see the use of **Storage** on a practical example. Suppose we would like to 
 name: 'John'
 surname: 'Doe'
 identification: 99999999
-Address: 'Apartment 1c 213 Derrick Street Boston, MA 02130 USA'
+address: 'Apartment 1c 213 Derrick Street Boston, MA 02130 USA'
 ```
 > *(Note) Let's ignore the sql noramlization rules of address for the sake of simplicity.*
 
@@ -170,25 +170,33 @@ We can insert all 4 parameters with one request using the `setProperties` functi
 
 The request looks like:
 ```
-name -> calculate felt
-surname -> calculate felt
-address -> calculate felts
+'name' -> 1851878757
+'surname' -> 32498756660325733
+'identification' -> 2137607216152422741414319187652462
+'address' -> 27413455319692147
+'John' -> 1248815214
+'Doe' -> 4484965
+'Apartment 1c 213 Derrick Street Boston, MA 02130 USA' -> [339778646234179790318151820149535281, 265461595803987861726527707067606373, 602960736248495209273730863602872370, 13848555652731713]
 ```
-```
-setProperties(4, (TODO calculate felts), tokenId, 4, (TODO calculate felts), TODO, (TODO calculate felts))
+```java
+names = [1851878757, 32498756660325733, 2137607216152422741414319187652462, 27413455319692147]
+offsets = [1, 2, 3, 7]
+values = [1248815214, 4484965, 99999999, 339778646234179790318151820149535281, 265461595803987861726527707067606373, 602960736248495209273730863602872370, 13848555652731713]
+
+setProperties(4, names, tokenId, 4, offsets, 7, values)
 ```
 
 Voila! All 4 properties are inserted. 
 
 Now you can retrive them as:
 ```
-getProperties(4, (TODO calculate felts), tokenId)
+getProperties(4, names, tokenId)
 ```
 
-Now let's say a student gets a new grade. We can add simply by using the `setPropertyFelt` method.
+Now let's say a student gets a new grade (10) for chemistry. We can simply add it by using the `setPropertyFelt` method.
 ```
-chemistry -> calculate felt
+'chemistry' -> 1833750202349513896569
 ```
 ```
-setPropertyFelt(TODO, tokenId, 10)
+setPropertyFelt(1833750202349513896569, tokenId, 10)
 ```
