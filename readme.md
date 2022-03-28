@@ -168,16 +168,20 @@ We can insert all 4 parameters with one request using the `setProperties` functi
 - Example python helper methods for string->felt (and vice versa) are accessible in `test\utils.py`. For our example we would use `str_to_felt()` for *name* and *surname* (since they can be stored as short string) and `str_to_felt_array()` for address.
 ---
 
-The request looks like:
-```
+Mapping of strings to felt:
+```java
+//PROPERTY NAMES
 'name' -> 1851878757
 'surname' -> 32498756660325733
 'identification' -> 2137607216152422741414319187652462
 'address' -> 27413455319692147
+
+//VALUES
 'John' -> 1248815214
 'Doe' -> 4484965
 'Apartment 1c 213 Derrick Street Boston, MA 02130 USA' -> [339778646234179790318151820149535281, 265461595803987861726527707067606373, 602960736248495209273730863602872370, 13848555652731713]
 ```
+The request should then look like:
 ```java
 names = [1851878757, 32498756660325733, 2137607216152422741414319187652462, 27413455319692147]
 offsets = [1, 2, 3, 7]
