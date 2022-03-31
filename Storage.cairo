@@ -104,7 +104,8 @@ func Storage_set_property_felt{
     token_id: Uint256,
     value: felt):
 
-    let (property_id) = storage_property_id.read()
+    let (prop) = storage_property_id.read()
+    let property_id = prop + 1
     storage_properties.write(name, token_id, property_id)
     storage_property.write(property_id, 0, value)
     storage_property_len.write(property_id, 1)
@@ -122,7 +123,8 @@ func Storage_set_property_array{
     value_len: felt,
     value: felt*):
 
-    let (property_id) = storage_property_id.read()
+    let (prop) = storage_property_id.read()
+    let property_id = prop + 1
     storage_properties.write(name, token_id, property_id)
     storage_property_len.write(property_id, value_len)
     storage_property_id.write(property_id + 1)
@@ -250,7 +252,8 @@ func _write_multiple_properties_as_array{
         return ()
     end
 
-    let (property_id) = storage_property_id.read()
+    let (prop) = storage_property_id.read()
+    let property_id = prop + 1
     storage_properties.write(names[n], token_id, property_id)
     storage_property_id.write(property_id + 1)
 
